@@ -81,9 +81,6 @@ export const deletePost = async (req, res, next) => {
     const paramsUserId = req.params.userId;
     const postId = req.params.postId;
 
-    console.log(isAdmin);
-    console.log(currentUserId);
-
     if (!isAdmin || currentUserId != paramsUserId) {
         return next(errorHandler(403, 'You are now allowed to delete this!'));
     };
@@ -94,6 +91,38 @@ export const deletePost = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+
+};
+
+export const updatePost = async (req, res, next) => {
+    const isAdmin = req.user.isAdmin;
+    const currentUserId = req.user.id;
+    const paramsUserId = req.params.userId;
+    const postId = req.params.postId;
+    const { title, content, category, image } = req.body;
+
+    console.log(title);
+
+    if (!isAdmin || currentUserId !== paramsUserId) {
+        return next(errorHandler(403, 'You are now allowed to delete this!'));
+    };
+
+    try {
+        const updatedPost = await Post.findByIdAndUpdate(postId, {
+            $set: {
+                title,
+                content,
+                category,
+                image
+            }
+        }, { new: true });
+
+        res.status(200).json(updatedPost);
+    } catch (error) {
+        next(error);
+    }
+
+
 
 };
 
