@@ -101,8 +101,6 @@ export const updatePost = async (req, res, next) => {
     const postId = req.params.postId;
     const { title, content, category, image } = req.body;
 
-    console.log(title);
-
     if (!isAdmin || currentUserId !== paramsUserId) {
         return next(errorHandler(403, 'You are now allowed to delete this!'));
     };
