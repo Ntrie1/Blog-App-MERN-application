@@ -165,7 +165,7 @@ export default function DashBoardComponent() {
 
         <div className='flex flex-col w-full md:w-auto shadow-md p-2 rpunded-md dark:bg-gray-800'>
           <div className='flex justify-between p-3 text-sm font-semibold'>
-            <h1 className='text-center p-2'>Recent Comments</h1>
+            <h1 className='text-center p-2'>Recent  Comments</h1>
             <Button outline gradientDuoTone='purpleToPink'>
               <Link to={"/dashboard?tab=users"}>
               See all
@@ -182,8 +182,8 @@ export default function DashBoardComponent() {
             {comments && comments.map((comment) => (
               <Table.Body key={comment._id} className='devide-y'>
                 <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800 '>
-                  <Table.Cell className='w-96'>
-                    <p className='line-clamp-2'>{comment.content}</p>
+                  <Table.Cell>
+                   <p className='line-clamp-2'>{comment.content}</p>
                   </Table.Cell>
                   <Table.Cell>
                     {comment.likes}
@@ -227,7 +227,7 @@ export default function DashBoardComponent() {
               </Table.Body>
             ) )}
           </Table>
-        </div>
+        </div> 
       </div>
       
     </div>
