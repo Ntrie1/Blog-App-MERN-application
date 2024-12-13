@@ -1,5 +1,5 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { FaMoon, FaSun } from 'react-icons/fa'
@@ -10,9 +10,18 @@ import { signoutSuccess } from '../redux/user/userSlice'
 
 export default function Header() {
     const path = useLocation().pathname;
+    const search = useLocation().search;
     const { currentUser } = useSelector(state => state.user);
     const dispatch = useDispatch();
     const { theme } = useSelector(state => state.theme);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(search);
+        const searchTermFormUrl = urlParams.get('searchTerm');
+        if (searchTermFormUrl) setSearchTerm(searchTermFormUrl);
+
+    }, [search])
 
     const handleSignOut = async () => {
         try {
